@@ -1,13 +1,64 @@
-<h2>Patient Details</h2>
-<p><b>ID:</b> {{ patient.id }}</p>
-<p><b>Name:</b> {{ patient.name }}</p>
-<p><b>Age:</b> {{ patient.age }}</p>
-<p><b>Blood Group:</b> {{ patient.blood_group }}</p>
-<p><b>Disease:</b> {{ patient.disease }}</p>
-<p><b>Phone:</b> {{ patient.phone }}</p>
-<p><b>Allergies:</b> {{ patient.allergies }}</p>
-<p><b>Emergency Contact:</b> {{ patient.emergency_contact }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient Details</title>
+</head>
+<body>
 
-<hr>
-<p>QR for this patient:</p>
-<img src="/generate_qr/{{ patient.id }}/" alt="QR">
+    <h2>Patient Details</h2>
+
+    <p><b>ID:</b> {{ patient.id }}</p>
+    
+    <p><b>Age:</b> {{ patient.age }}</p>
+    <p><b>Gender:</b> {{ patient.gender }}</p>
+    
+    <p><b>Email:</b> {{ patient.email }}</p>
+    <p><b>Address:</b> {{ patient.address }}</p>
+
+    <hr>
+
+    <h3>Medical Information</h3>
+    <p><b>Blood Group:</b> {{ patient.blood_group }}</p>
+    <p><b>Allergies:</b> {{ patient.allergies }}</p>
+    <p><b>Chronic Conditions:</b> {{ patient.chronic_conditions }}</p>
+    <p><b>Diseases:</b> {{ patient.disease }}</p>
+    <p><b>Past Surgeries:</b> {{ patient.past_surgeries }}</p>
+    <p><b>Medical History:</b> {{ patient.medical_history }}</p>
+    <p><b>Current Medications:</b> {{ patient.current_medications }}</p>
+    <p><b>Vaccination Records:</b> {{ patient.vaccinations }}</p>
+
+    <hr>
+
+    <h3>Doctor / Hospital Info</h3>
+    <p><b>Primary Doctor:</b> {{ patient.doctor_name }}</p>
+    <p><b>Doctor Contact:</b> {{ patient.doctor_contact }}</p>
+    <p><b>Hospital:</b> {{ patient.hospital_name }}</p>
+    <p><b>Insurance / Health ID:</b> {{ patient.insurance_id }}</p>
+
+    <hr>
+
+    <h3>Reports</h3>
+    {% if patient.report %}
+        <p><b>Download Report:</b> <a href="{{ patient.report.url }}" target="_blank">Click Here</a></p>
+    {% else %}
+        <p><i>No reports uploaded.</i></p>
+    {% endif %}
+
+    <hr>
+
+    <h3>Emergency Information</h3>
+    <p><b>Emergency Contact:</b> {{ patient.emergency_contact }}</p>
+    <p><b>Emergency Notes:</b> {{ patient.emergency_notes }}</p>
+
+    <hr>
+
+    <p><b>Last Updated:</b> {{ patient.updated_at }}</p>
+
+    <hr>
+
+    <p>QR for this patient:</p>
+    <img src="{% url 'generate_qr' patient.id %}" alt="QR Code">
+
+</body>
+</html>
